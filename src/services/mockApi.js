@@ -11,14 +11,11 @@ export const addContactApi = async contact => {
 
 export const getContactApi = async () => {
   return await axios.get('contacts').then(res => {
-      const { data } = res;
+    const { data } = res;
     return data;
   });
 };
 
 export const removeContactApi = async (id) => {
-  return await axios.delete(`contacts/:${id}`).then(res => {
-      const { data } = res;
-    return data;
-  });
+  return await axios.delete(`contacts/:${id}`).then(res => res.data);
 };

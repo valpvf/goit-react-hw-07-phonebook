@@ -1,7 +1,8 @@
 const { createSlice } = require('@reduxjs/toolkit');
 
 const initialState = {
-  contacts: JSON.parse(localStorage.getItem('contacts')) ?? [],
+  contacts: [],
+    // JSON.parse(localStorage.getItem('contacts')) ?? [],
   filter: '',
   isLoading: false,
   error: null,
@@ -38,7 +39,7 @@ const contactsSlice = createSlice({
     },
     removeContactSuccess(state, { payload }) {
       state.isLoading = false;
-      state.contacts = state.filter(el => el.id !== payload);
+      state.contacts = state.contacts.filter(el => el.id !== payload);
     },
     removeContactError(state, { payload }) {
       state.isLoading = false;

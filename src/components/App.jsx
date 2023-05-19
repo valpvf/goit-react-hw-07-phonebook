@@ -3,19 +3,8 @@ import {
   TitleStyled,
   SubtitleStyled,
 } from '../components/ContactForm/ContactForm.styled';
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { getContact } from 'redux/contactsOperations';
 
 export const App = () => {
-  const dispatch = useDispatch();
-  const isContacts = useSelector(state => Boolean(state.phoneBook.contacts.length));
-
-
-  useEffect(() => {
-    !isContacts && dispatch(getContact());
-  }, [dispatch, isContacts]);
-
   return (
     <div
       style={{

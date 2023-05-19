@@ -24,7 +24,7 @@ export const getContact = () => {
   return dispatch => {
     dispatch(getContactRequest());
     getContactApi()
-      .then(data => dispatch(getContactSuccess([data])))
+      .then(data => dispatch(getContactSuccess(data)))
       .catch(err => dispatch(getContactError(err.message)));
   };
 };
@@ -33,7 +33,7 @@ export const removeContact = (id) => {
   return dispatch => {
     dispatch(removeContactRequest());
     removeContactApi(id)
-      .then(data => dispatch(removeContactSuccess(id)))
+      .then(id => dispatch(removeContactSuccess(id)))
       .catch(err => dispatch(removeContactError(err.message)))
   };
 };
