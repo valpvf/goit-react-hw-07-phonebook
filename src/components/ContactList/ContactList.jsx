@@ -6,8 +6,9 @@ import { remove } from 'redux/contactsSlice';
 
 const ContactList = () => {
   const dispatch = useDispatch();
-  const contacts = useSelector(state => state.phoneBook.contacts);
+  const contacts = useSelector(state => state.phoneBook.contacts[1]);
   const filter = useSelector(state => state.phoneBook.filter);
+  console.log(contacts);
 
   const showContacts = () => {
     if (filter === '') return contacts;

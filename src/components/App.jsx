@@ -3,8 +3,17 @@ import {
   TitleStyled,
   SubtitleStyled,
 } from '../components/ContactForm/ContactForm.styled';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { getContact } from 'redux/contactsOperations';
 
 export const App = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getContact());
+  }, [dispatch]);
+
   return (
     <div
       style={{

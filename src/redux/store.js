@@ -12,6 +12,15 @@ import {
 import storage from 'redux-persist/lib/storage';
 
 import contactsReducer from './contactsSlice';
+import logger from 'redux-logger';
+
+const thunk = store => next => action => {
+  if (typeof action === 'function') {
+    action(store.dispatch, store.getState);
+    return;
+  }
+  next(action);
+};
 
 const contactsConfigure = { key: 'contacts', storage, whitelist: ['contacts'] };
 const rootReducer = combineReducers({
@@ -26,6 +35,8 @@ export const store = configureStore({
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
     }),
+    logger,
+    thunk,
   ],
 });
 

@@ -7,8 +7,7 @@ import {
   InputStyled,
   BtnStyled,
 } from './ContactForm.styled';
-import { addContactError, addContactRequest, addContactSuccess } from 'redux/contactsSlice';
-import { addContactApi } from 'services/mockApi';
+import { addContact } from 'redux/contactsOperations';
 
 const ContactForm = () => {
   const contacts = useSelector(state => state.phoneBook.contacts);
@@ -29,9 +28,7 @@ const ContactForm = () => {
     if (contacts.some(el => el.name.toLowerCase() === name.toLowerCase())) {
       return alert(`${name} is already in contacts.`);
     }
-    dispatch(addContactRequest());
-    addContactApi(form).then((contact) => dispatch(addContactSuccess(contact)));
-    dispatch(addContactError());
+    dispatch(addContact(form));
     e.target.reset();
   };
 
