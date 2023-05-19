@@ -12,7 +12,13 @@ export const addContactApi = async contact => {
 export const getContactApi = async () => {
   return await axios.get('contacts').then(res => {
       const { data } = res;
-      console.log('data', data);
+    return data;
+  });
+};
+
+export const removeContactApi = async (id) => {
+  return await axios.delete(`contacts/:${id}`).then(res => {
+      const { data } = res;
     return data;
   });
 };

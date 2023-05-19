@@ -2,13 +2,13 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { BtnStyled } from 'components/ContactForm/ContactForm.styled';
 import { ItemStyled, ListStyled } from './ContactList.styled';
-import { remove } from 'redux/contactsSlice';
+import { removeContact } from 'redux/contactsOperations';
 
 const ContactList = () => {
   const dispatch = useDispatch();
-  const contacts = useSelector(state => state.phoneBook.contacts[1]);
+  const contacts = useSelector(state => state.phoneBook.contacts);
   const filter = useSelector(state => state.phoneBook.filter);
-  console.log(contacts);
+  console.log('contacts', contacts);
 
   const showContacts = () => {
     if (filter === '') return contacts;
@@ -24,7 +24,7 @@ const ContactList = () => {
       {renderContacts.map(el => (
         <ItemStyled key={el.id}>
           {el.name}: {el.number}
-          <BtnStyled onClick={() => dispatch(remove(el.id))}>Delete</BtnStyled>
+          <BtnStyled onClick={() => dispatch(removeContact(el.id))}>Delete</BtnStyled>
         </ItemStyled>
       ))}
     </ListStyled>
