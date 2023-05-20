@@ -16,6 +16,6 @@ export const getContactApi = async () => {
   });
 };
 
-export const removeContactApi = async (id) => {
-  return await axios.delete(`contacts/:${id}`).then(res => res.data);
+export const removeContactApi = async id => {
+  return await axios.delete(`contacts/${id}`).then(res => res.data);
 };

@@ -1,39 +1,52 @@
-import { addContactApi, getContactApi, removeContactApi } from 'services/mockApi';
+import { createAsyncThunk } from '@reduxjs/toolkit';
+
 import {
-  addContactError,
-  addContactRequest,
-  addContactSuccess,
-  getContactError,
-  getContactRequest,
-  getContactSuccess,
-  removeContactError,
-  removeContactRequest,
-  removeContactSuccess,
-} from './contactsSlice';
+  addContactApi,
+  getContactApi,
+  removeContactApi,
+} from 'services/mockApi';
 
-export const addContact = form => {
-  return dispatch => {
-    dispatch(addContactRequest());
-    addContactApi(form)
-      .then(contact => dispatch(addContactSuccess(contact)))
-      .catch(err => dispatch(addContactError(err.message)));
-  };
-};
+export const addContact = createAsyncThunk(
+  'contact/add',
+  async (form, thunkApi) => {
+    try {
+      const contact = await addContactApi(form);
+      return contact;
+    } catch (error) {
+      return thunkApi.rejectWithValue(error.message);
+    }
+  }
+);
 
-export const getContact = () => {
-  return dispatch => {
-    dispatch(getContactRequest());
-    getContactApi()
-      .then(data => dispatch(getContactSuccess(data)))
-      .catch(err => dispatch(getContactError(err.message)));
-  };
-};
+export const getContact = createAsyncThunk(
+  'contact/get',
+  async (_, { rejectWithValue }) => {
+    try {
+      const data = await getContactApi();
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
 
-export const removeContact = (id) => {
-  return dispatch => {
-    dispatch(removeContactRequest());
-    removeContactApi(id)
-      .then(id => dispatch(removeContactSuccess(id)))
-      .catch(err => dispatch(removeContactError(err.message)))
-  };
-};
+export const removeContact = createAsyncThunk(
+  'contact/remove',
+  async (id, { rejectWithValue }) => {
+    try {
+      await removeContactApi(id);
+      return id;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+// export const removeContact = id => {
+//   return dispatch => {
+//     dispatch(removeContactRequest());
+//     removeContactApi(id)
+//       .then(data => dispatch(removeContactSuccess(id)))
+//       .catch(err => dispatch(removeContactError(err.message)));
+//   };
+// };

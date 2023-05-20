@@ -3,12 +3,13 @@ import {
   TitleStyled,
   SubtitleStyled,
 } from '../components/ContactForm/ContactForm.styled';
+import Loader from './Loader/Loader';
 
 export const App = () => {
   return (
     <div
       style={{
-        height: '100vh',
+        // height: '100vh',
         display: 'flex',
         flexDirection: 'column',
         flexWrap: 'nowrap',
@@ -22,6 +23,7 @@ export const App = () => {
       <ContactForm />
       <SubtitleStyled>Contacts</SubtitleStyled>
       <Filter />
+      <Loader />
       <ContactList />
     </div>
   );

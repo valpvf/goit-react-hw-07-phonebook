@@ -7,12 +7,9 @@ import { useEffect } from 'react';
 
 const ContactList = () => {
   const dispatch = useDispatch();
-  // const isContacts = useSelector(state => Boolean(state.contacts.length));
+  const isContacts = useSelector(state => Boolean(state.contacts.length));
 
-  useEffect(() => {
-   dispatch(getContact());
-  }, [dispatch]);
-
+  
   const contacts = useSelector(state => state.contacts);
   const filter = useSelector(state => state.filter);
 
@@ -24,6 +21,9 @@ const ContactList = () => {
   };
 
   const renderContacts = showContacts();
+useEffect(() => {
+    !isContacts && dispatch(getContact());
+  }, [dispatch, isContacts]);
 
   return (
     <ListStyled>
